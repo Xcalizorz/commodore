@@ -116,7 +116,8 @@ class ComponentTemplater:
         click.echo(" > Installing component")
         try:
             create_component_symlinks(self.config, component)
-            update_target(self.config, self.slug)
+            for target in self.config.get_component_aliases().keys():
+                update_target(self.config, target)
             insert_into_jsonnetfile(self.config, component.target_directory)
             # call fetch_jsonnet_libraries after updating jsonnetfile to
             # symlink new component into vendor/
