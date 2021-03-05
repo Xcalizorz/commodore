@@ -110,6 +110,9 @@ def _read_components(
         if "version" in info:
             component_versions[component_name] = info["version"]
         else:
+            cfg.register_deprecation_notice(
+                f"Component {component_name} doesn't have a version specified. ...TODO URL"
+            )
             # Note: We use version=None as a marker for checking out the remote repo's default branch
             component_versions[component_name] = None
         if cfg.debug:
